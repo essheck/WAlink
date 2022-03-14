@@ -5,7 +5,7 @@ var bodyParser = require('body-parser')
 var urlencodedParser = bodyParser.urlencoded({ extended: true })
 app.set("views", path.join(__dirname, "/views"));
 app.set('view engine', 'ejs');
-var port = 3000;
+var port = process.env.PORT || 3000;
 const waMe = require("wa-me-generator");
 app.use(express.static('public'));
 app.use(express.static(path.join(__dirname, '/public')));
