@@ -45,6 +45,10 @@ body {
                 color: hsla(0, 0%, 100%, 0.5);
                 font-family: 'Marcellus', serif;
             }
+
+            .form-box > input:focus::placeholder {
+                color: transparent;
+              }
         
 
         .form-box > button {    
