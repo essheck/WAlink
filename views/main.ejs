@@ -35,9 +35,10 @@
     <div id="list-container" class="input-box">
         <ul>
             <% if(sendList) { %>
-                <% sendList.sort(function (a, b) {
+                <%  if(sendList.length > 0) { 
+                    sendList.sort(function (a, b) {
                     return a.time.localeCompare(b.time);
-                }); %>
+                }); } %>
             <% for(var i = 0; i < sendList.length; i++) { %>
                 <% if(sendList[i]) { %>
                     <li class="ui segment">
