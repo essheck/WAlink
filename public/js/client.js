@@ -7,6 +7,8 @@ window.addEventListener("pageshow", () => {
     document.getElementById("form").reset();
   });
 
+
+
 var Input = document.getElementById("all-input");
 Input.addEventListener("input" , hello);
 
@@ -18,5 +20,12 @@ function hello(e){
     console.log(parts);
     document.getElementById("time").value = parts[0];
     document.getElementById("link").value = parts[1];
-    document.getElementById("phonenumber").value = parts[2]
+    document.getElementById("phonenumber").value = parts[2];
+//     document.getElementById("name").value = parts[3];
+
 };
+
+document.getElementById("send-now").addEventListener("click" , () => {
+    //document.getElementById("form").reset();
+});
+

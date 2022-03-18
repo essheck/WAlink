@@ -5,12 +5,14 @@
     <link rel="stylesheet" href="/css/style.css">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>wa.me Link Generator</title>
+    <script src="/js/preload.js"></script>
     
 </head>
 <body>
-    <div class="input-box">
+
+    <div class="input-box" id="form-box">
     
-    <form action="/link" method="post" id="form" autocomplete="off" class="form-box">
+    <form action="/" method="post" id="form" autocomplete="off" class="form-box" onsubmit="setTimeout(function () { window.location.reload(); }, 10)">
         <h2>Paste Everything Here</h2>
         <input type="text" name="all" id="all-input">
         <h2>OR</h2>
@@ -21,10 +23,43 @@
         
         <input type="tel" minlength="10" maxlength="10"  placeholder="Phone Number" name="phonenumber" id="phonenumber">
         
-        <button id="send-btn"><span>Send</span></button>
+        <!-- <input type="text" name="name" id="name" placeholder="Customer Name"> -->
+
+        <input type="submit" value="Now" id="send-now" class="send" name="action" formtarget="_blank">
+        <input type="submit" value="DNP" id="send-now" class="send" name="action" formtarget="_blank">
+        <input type="submit" value="Attending" id="send-later" class="send" name="action" formtarget="_self">
+        
     </form>
     </div>
-    
+
+    <div id="list-container" class="input-box">
+        <ul>
+            <% if(sendList) { %>
+                <% sendList.sort(function (a, b) {
+                    return a.time.localeCompare(b.time);
+                }); %>
+            <% for(var i = 0; i < sendList.length; i++) { %>
+                <% if(sendList[i]) { %>
+                    <li class="ui segment">
+                        <form action="/" method="post"  onsubmit="setTimeout(function () { window.location.reload(); }, 10)">
+                            <input type="hidden" name="time" value= "<%= sendList[i].time %>">
+                            <input type="hidden" name="phonenumber" value= "<%= sendList[i].phonenumber %>">
+                            <input type="hidden" name="link" value= "<%= sendList[i].link %>">
+                        <%= sendList[i].time %> | <%= sendList[i].phonenumber %>
+                        <!-- <%= sendList[i].link %> --> 
+                            <input type="submit" value="Send" name="action" class="btn-list" formtarget="_blank"> 
+                            <input type="submit" value="Delete" name="action" class="btn-list" id="btn-list-delete" formtarget="_self">
+                        </form>
+                      </li>
+                <% } %>
+              
+            <% }; } %>
+          </ul>
+    </div>
+
+
+
+
 </body>
 <script src="/js/client.js"></script>
 </html>
