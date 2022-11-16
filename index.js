@@ -29,57 +29,62 @@ app.get("/", (req, res) => {
   });
 
   app.post("/" , urlencodedParser , (req , res) => {
-    if(req.body.action === "Now"){
+    if(req.body.action === "Send Now"){
     res.redirect(waMe.createFromNumberWithMessage("+91"+ req.body.phonenumber, 
-    "Greetings! from Leap Scholar support team   \n\n" + req.body.link + 
-    " \n\nAbove is the link for your free session with our expert counsellor where you can clarify all your doubts related to studying abroad\n\nYour session is scheduled for today at " 
-    + req.body.time))
-    }
-    if(req.body.action === "DNP"){
-      res.redirect(waMe.createFromNumberWithMessage("+91"+ req.body.phonenumber, 
-      "Greetings! from Leap Scholar support team   \n\n" + req.body.link + 
-      " \n\nAbove is the link for your free session with our expert counsellor where you can clarify all your doubts related to studying abroad\n\nYour session is scheduled for today at " 
-      + req.body.time + "\n\n\n*I'm unable to reach you over calls, Your Session will start soon.*\n*Will you be able to join? Please confirm.*"))
-      }
+    "Greetings!, I am "+ req.body.agents +" from Leap Scholar support team.   \n\nHi, " + req.body.name + ", \nWe could see that you have booked a free counselling session for today at *"
+    + req.body.time + "* for studying in *" + req.body.country + "*.\n\n"
+    
+    + req.body.link + 
+    " \n\nAbove is the link for your free session with our expert counsellor where you can clarify all your doubts related to studying abroad\n\nPlease take out 10-15 min to join the session, As this will be really beneficial for you"
+     + " \n\n You can talk about : \n-IELTS coaching.\n-The right country for your profile.\n- Universities.\n- Financial support.\n- Scholarships and Loans.\n- Visa Applications.\n\nAnd any other doubts you have about studying abroad, You Can clarify with an Expert Counsellor in this session."
+    ))
 
-    if(req.body.action === "Attending"){
-      if(req.session.sendlist){
-        ++req.session.index;
-      }
-      else {
-        req.session.index = 0;
-        req.session.sendlist = [];
-      }
-      req.session.sendlist[req.session.index] = {time: req.body.time , link: req.body.link , phonenumber: req.body.phonenumber}
+    }
+    // if(req.body.action === "DNP"){
+    //   res.redirect(waMe.createFromNumberWithMessage("+91"+ req.body.phonenumber, 
+    //   "Greetings! from Leap Scholar support team   \n\n" + req.body.link + 
+    //   " \n\nAbove is the link for your free session with our expert counsellor where you can clarify all your doubts related to studying abroad\n\nYour session is scheduled for today at " 
+    //   + req.body.time + "\n\n\n*I'm unable to reach you over calls, Your Session will start soon.*\n*Will you be able to join? Please confirm.*"))
+    //   }
 
-      res.render("main" , {sendList: req.session.sendlist});
-    }
-    if(req.body.action === "Send"){
-      req.session.sendList = removeItem(req.body.phonenumber , req.session.sendlist);
-      req.session.index--;
-      res.redirect(waMe.createFromNumberWithMessage("+91"+req.body.phonenumber, 
-    "Greetings! from Leap Scholar support team   \n\n" + req.body.link + 
-    " \n\nAbove is the link for your free session with our expert counsellor where you can clarify all your doubts related to studying abroad\n\nYour session is scheduled for today at " + req.body.time + "\n\n*It is starting soon! Join now.*"));
-    }
-    if(req.body.action === "Delete"){
-      req.session.sendList =  removeItem(req.body.phonenumber , req.session.sendlist);
-      req.session.index--;
-      res.render("main" , {sendList: req.session.sendlist});
-    }
+    // if(req.body.action === "Attending"){
+    //   if(req.session.sendlist){
+    //     ++req.session.index;
+    //   }
+    //   else {
+    //     req.session.index = 0;
+    //     req.session.sendlist = [];
+    //   }
+    //   req.session.sendlist[req.session.index] = {time: req.body.time , link: req.body.link , phonenumber: req.body.phonenumber}
+
+    //   res.render("main" , {sendList: req.session.sendlist});
+    // }
+    // if(req.body.action === "Send"){
+    //   req.session.sendList = removeItem(req.body.phonenumber , req.session.sendlist);
+    //   req.session.index--;
+    //   res.redirect(waMe.createFromNumberWithMessage("+91"+req.body.phonenumber, 
+    // "Greetings! from Leap Scholar support team   \n\n" + req.body.link + 
+    // " \n\nAbove is the link for your free session with our expert counsellor where you can clarify all your doubts related to studying abroad\n\nYour session is scheduled for today at " + req.body.time + "\n\n*It is starting soon! Join now.*"));
+    // }
+    // if(req.body.action === "Delete"){
+    //   req.session.sendList =  removeItem(req.body.phonenumber , req.session.sendlist);
+    //   req.session.index--;
+    //   res.render("main" , {sendList: req.session.sendlist});
+    // }
   });
 
-  function removeItem(phonenumber , List) {
-      var i = 0;
-      while(i < List.length){
-        if(List[i].phonenumber === phonenumber){
-          List.splice(i , 1);
-          console.log("deleted" + phonenumber);
-        } else {
-          ++i;
-        }
-      }
-      return List;
-  }
+  // function removeItem(phonenumber , List) {
+  //     var i = 0;
+  //     while(i < List.length){
+  //       if(List[i].phonenumber === phonenumber){
+  //         List.splice(i , 1);
+  //         console.log("deleted" + phonenumber);
+  //       } else {
+  //         ++i;
+  //       }
+  //     }
+  //     return List;
+  // }
 
 app.listen(port, () => {
     console.log(`Listening to requests on http://localhost:${port}`);    
