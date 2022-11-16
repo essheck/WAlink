@@ -11,7 +11,7 @@ body {
 }
 
 #form-box {
-    width: 70%;
+    width: 100%;
     float: left;
 }
 #list-container {
@@ -32,7 +32,7 @@ body {
     }
     .form-box {
         width: 100%;
-        max-width: 600px;
+        max-width: 800px;
         margin: auto;
         flex-direction: column;
     }
@@ -62,7 +62,7 @@ body {
 
         .form-box > .send {    
             all: unset;
-            margin-top: 2em;
+            margin-top: 1em;
             background: transparent;
             border: 2px solid white;
             padding: 0.6em 2.8em;
