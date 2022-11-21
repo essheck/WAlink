@@ -36,7 +36,7 @@ app.get("/", (req, res) => {
 
     if(req.body.action === "Send Now"){
     res.redirect(waMe.createFromNumberWithMessage("+91"+ req.body.phonenumber, 
-    Greeting + ", I am "+ req.body.agents +" from Leap Scholar support team.   \n\nHi, " + req.body.name + ", \nWe could see that you have booked a free counselling session for today at *"
+    "Greetings !, I am "+ req.body.agents +" from Leap Scholar support team.   \n\nHi, " + req.body.name + ", \nWe could see that you have booked a free counselling session for today at *"
     + req.body.time + "* for studying in *" + req.body.country + "*.\n\n"
     
     + req.body.link + 
